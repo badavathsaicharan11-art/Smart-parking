@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Parking Space Allocation</title>
+</head>
+<body>
+
+<h1>🚗 Smart Parking Space Allocation</h1>
+
+<h2>Available Parking Slots</h2>
+
+<p>🟢 Available &nbsp;&nbsp; 🔴 Occupied</p>
+
+<h3>Parking Area</h3>
+
+<p>
+{% for slot in ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4"] %}
+    {% if slot in occupied %}
+        🔴 {{ slot }}
+    {% else %}
+        🟢 {{ slot }}
+    {% endif %}
+    &nbsp;
+    {% if slot == "A4" or slot == "B4" %}
+        <br><br>
+    {% endif %}
+{% endfor %}
+</p>
+
+<form action="/allocate" method="POST">
+    <label>Vehicle Number:</label>
+    <input type="text" name="vehicle" required>
+    <button type="submit">Find Parking Slot</button>
+</form>
+
+{% if result %}
+<h3>{{ result }}</h3>
+{% endif %}
+
+</body>
+</html>
